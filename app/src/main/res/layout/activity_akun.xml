@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white">
+
+    <TextView
+        android:id="@+id/txt_person"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="HALAMAN PROFIL"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="30sp"/>
+
+    <TextView
+        android:id="@+id/txt_nama"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        android:layout_marginLeft="25dp"
+        android:text="Dinar"
+        android:textColor="@color/black"
+        android:textSize="13sp"/>
+
+    <TextView
+        android:id="@+id/txt_no_hp"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="230dp"
+        android:layout_marginLeft="25dp"
+        android:text="087716350200"
+        android:textColor="@color/black"
+        android:textSize="13sp"/>
+
+    <TextView
+        android:id="@+id/txt_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="260dp"
+        android:layout_marginLeft="25dp"
+        android:text="dinar92@gmail.com"
+        android:textColor="@color/black"
+        android:textSize="13sp"/>
+
+    <TextView
+        android:id="@+id/txt_jk"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="290dp"
+        android:layout_marginLeft="25dp"
+        android:text="Laki - laki"
+        android:textColor="@color/black"
+        android:textSize="13sp"/>
+
+
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="110dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginLeft="200dp"
+        android:src="@drawable/profil"/>
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</RelativeLayout>

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".riwayat"
+    android:background="@color/white">
+
+    <TextView
+        android:id="@+id/txt_cart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:gravity="center"
+        android:text="RIWAYAT PEMESANAN"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="30sp"/>
+
+    <ImageView
+        android:id="@+id/water"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="250dp"
+        android:layout_marginLeft="25dp"
+        android:src="@drawable/air"
+        android:background="#6495ED"/>
+
+    <TextView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="250dp"
+        android:layout_marginLeft="50dp"
+        android:layout_toRightOf="@+id/water"
+        android:text="WATER1"
+        android:textSize="18sp"/>
+
+    <TextView
+        android:layout_width="70dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="280dp"
+        android:layout_marginLeft="50dp"
+        android:layout_toRightOf="@+id/water"
+        android:text="2 buah"
+        android:textSize="13sp"/>
+
+    <TextView
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="300dp"
+        android:layout_marginLeft="150dp"
+        android:text="Air Minum Isi Ulang"
+        android:textSize="13sp"/>
+
+    <TextView
+        android:layout_width="70dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="330dp"
+        android:layout_marginLeft="50dp"
+        android:layout_toRightOf="@+id/water"
+        android:text="Rp.10.000"
+        android:textSize="13sp"/>
+
+
+    <ImageView
+        android:id="@+id/water2"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="380dp"
+        android:layout_marginLeft="25dp"
+        android:src="@drawable/air"
+        android:background="#6495ED"/>
+
+    <TextView
+        android:layout_width="70dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="380dp"
+        android:layout_marginLeft="50dp"
+        android:layout_toRightOf="@+id/water"
+        android:text="WATER2"
+        android:textSize="18sp"/>
+
+    <TextView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="410dp"
+        android:layout_marginLeft="50dp"
+        android:layout_toRightOf="@+id/water"
+        android:text="4 buah"
+        android:textSize="13sp"/>
+
+    <TextView
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="430dp"
+        android:layout_marginLeft="50dp"
+        android:layout_toRightOf="@+id/water"
+        android:text="Air Minum Isi Ulang"
+        android:textSize="13sp"/>
+
+    <TextView
+        android:layout_width="70dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="450dp"
+        android:layout_marginLeft="50dp"
+        android:layout_toRightOf="@+id/water"
+        android:text="Rp.20.000"
+        android:textSize="13sp"/>
+
+    <ImageView
+        android:id="@+id/water3"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="500dp"
+        android:layout_marginLeft="25dp"
+        android:src="@drawable/air"
+        android:background="#6495ED"/>
+
+    <TextView
+        android:layout_width="70dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="500dp"
+        android:layout_marginLeft="50dp"
+        android:layout_toRightOf="@+id/water"
+        android:text="WATER3"
+        android:textSize="18sp"/>
+
+    <TextView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="530dp"
+        android:layout_marginLeft="50dp"
+        android:layout_toRightOf="@+id/water"
+        android:text="6 buah"
+        android:textSize="13sp"/>
+
+    <TextView
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="550dp"
+        android:layout_marginLeft="50dp"
+        android:layout_toRightOf="@+id/water"
+        android:text="Air Minum Isi Ulang"
+        android:textSize="13sp"/>
+
+    <TextView
+        android:layout_width="70dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="580dp"
+        android:layout_marginLeft="50dp"
+        android:layout_toRightOf="@+id/water"
+        android:text="Rp.30.000"
+        android:textSize="13sp"/>
+</RelativeLayout>
+
+

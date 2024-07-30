@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "622200408213",
+    "project_id": "depoair2-6155f",
+    "storage_bucket": "depoair2-6155f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:622200408213:android:b9fc2c31c451794af5b39c",
+        "android_client_info": {
+          "package_name": "com.example.depoair2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAMcS34TqbmJ_xqqAEVOLIy2lYaZPLAjs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
