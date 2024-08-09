@@ -32,7 +32,7 @@
             android:name=".pengantaran"
             android:exported="false" />
         <activity
-            android:name=".admin"
+            android:name=".AdminActivity"
             android:exported="false" />
         <activity
             android:name=".pemesanan"
@@ -41,7 +41,7 @@
             android:name=".beranda"
             android:exported="false" />
         <activity
-            android:name=".riwayat"
+            android:name=".RiwayatPemesananActivity"
             android:exported="false" />
         <activity
             android:name=".akun"

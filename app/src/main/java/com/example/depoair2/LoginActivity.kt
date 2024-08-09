@@ -5,8 +5,11 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import com.example.depoair2.databinding.ActivityLoginBinding
+import com.example.depoair2.models.Users
+import com.example.depoair2.ui.reference.UserReference
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -37,10 +40,11 @@ class LoginActivity : AppCompatActivity() {
         binding.btnlogin.setOnClickListener {
             val username: String = binding.edtPhone.text.toString()
             val password: String = binding.edtPassword.text.toString()
+
             if (username.isEmpty()) {
                 binding.edtPhone.error = "Data Tidak Boleh Kosong"
                 binding.edtPhone.requestFocus()
-            } else if (password.isEmpty ()) {
+            } else if (password.isEmpty()) {
                 binding.edtPassword.error = "Data Tidak Boleh Kosong"
                 binding.edtPassword.requestFocus()
             } else {
@@ -49,19 +53,18 @@ class LoginActivity : AppCompatActivity() {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         if (snapshot.exists()) {
                             for (item in snapshot.children) {
-                                val user = item.getValue<UserData>()
+                                val user = item.getValue<Users>()
+                                Log.d("tes", "onDataChange: $user")
                                 if (user != null) {
                                     if (user.password == password) {
-                                        pref.edit().apply {
-                                            putString("username", username)
-                                            putBoolean("prefStatus", true)
-                                            putString("prefLevel", user.level)
-                                            apply()
-                                        }
-                                        val intent = if (user.level == "User") {
+                                        // Simpan data pengguna ke SharedPreferences menggunakan UserReference
+                                        val userReference = UserReference(context)
+                                        userReference.simpanUser(user)
+
+                                        val intent = if (user.role == "pelanggan") {
                                             Intent(context, beranda::class.java)
                                         } else {
-                                            Intent(context, beranda::class.java)
+                                            Intent(context, AdminActivity::class.java)
                                         }
                                         startActivity(intent)
                                         finish()
@@ -81,17 +84,6 @@ class LoginActivity : AppCompatActivity() {
                 })
             }
         }
+
     }
-//    override fun onStart() {
-//        super.onStart()
-//        if (pref.getBoolean("prefStatus", false)) {
-//            val intent = if (pref.getString("prefLevel", "") == "User") {
-//                Intent(context, RegisterActivity::class.java)
-//            } else {
-//                Intent(context, MainActivity::class.java)
-//            }
-//            startActivity(intent)
-//            finish()
-//        }
-//    }
 }

@@ -62,7 +62,7 @@ class beranda : AppCompatActivity() {
                 true
             }
             R.id.nav_riwayat -> {
-                startActivity(Intent(this, riwayat::class.java))
+                startActivity(Intent(this, RiwayatPemesananActivity::class.java))
                 true
             }
             R.id.nav_akun -> {

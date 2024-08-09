@@ -9,7 +9,7 @@ import com.example.depoair2.models.Users
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
-class RegisterActivity : AppCompatActivity() {
+class  RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
     private lateinit var database: DatabaseReference
 
@@ -31,7 +31,7 @@ class RegisterActivity : AppCompatActivity() {
             val nama = binding.ednm.text.toString()
             val password = binding.edpw.text.toString()
             val phone = binding.edphone.text.toString()
-            val role = "pelanggan"
+            val role = "admin"
 
             database = FirebaseDatabase.getInstance().getReference("Users")
             val user = Users( nama, phone, password, role )

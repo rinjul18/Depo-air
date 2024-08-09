@@ -8,54 +8,94 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.depoair2.databinding.ActivityDataPelanggan2Binding
 import com.example.depoair2.models.Orders
+import com.example.depoair2.ui.reference.UserReference
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import java.text.NumberFormat
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.util.Date
+import java.util.Locale
+
 
 class PemesananActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDataPelanggan2Binding
     private lateinit var database: DatabaseReference
     private lateinit var pref: SharedPreferences
-
+    private lateinit var user: UserReference
+    private var quantity: Int = 1
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // Inflate layout menggunakan binding
         binding = ActivityDataPelanggan2Binding.inflate(layoutInflater)
         setContentView(binding.root)
         pref = getSharedPreferences("MyPrefs", MODE_PRIVATE)
 
-        // Inisialisasi database Firebase
+        user = UserReference(this)
         database = FirebaseDatabase.getInstance().getReference("Orders")
+        binding.tvquantity.text = quantity.toString()
+        binding.btnTambah.setOnClickListener {
+            quantity++
+            binding.tvquantity.text = quantity.toString()
+            updateTotal()
+        }
 
-        // Set onClickListener untuk tombol pesan
+        // Handle click on minus button
+        binding.btnKurang.setOnClickListener {
+            if (quantity > 1) {
+                quantity--
+                binding.tvquantity.text = quantity.toString()
+                updateTotal()
+            }
+        }
         binding.btnPesan.setOnClickListener {
-            val username = pref.getString("username", null)
-            val jumlah = binding.jumlah.text.toString()
-            val status = "diproses"
+            val nama = user.ambilUser()?.nama
+            val jumlah = binding.tvquantity.text.toString()
+            val status = "Diproses"
+            val alamat = binding.alamat.text.toString()
+            val phone = user.ambilUser()?.phone
 
-            if (username != null && jumlah.isNotEmpty()) {
-                // Gunakan no_hp sebagai kunci unik
+            val date = Date()
+            val formatter = SimpleDateFormat("dd MMMM yyyy, EEEE HH:mm ", Locale("id", "ID"))
+            val tanggal = formatter.format(date)
 
-                val data = Orders(username, jumlah.toInt(), status)
+            if (nama?.isNotEmpty() == true && jumlah.isNotEmpty()) {
+                val newOrderRef = database.push()
+                val orderId = newOrderRef.key
 
-                // Simpan data ke Firebase
-                database.push().setValue(data)
+                val data = Orders(
+                    orderId = orderId,
+                    nama = nama,
+                    jumlah = jumlah.toInt(),
+                    status = status,
+                    phone =phone ,
+                    alamat = alamat,
+                    tanggal = tanggal
+                )
+
+                // Menyimpan data dengan ID
+                newOrderRef.setValue(data)
                     .addOnSuccessListener {
-                        Toast.makeText(this, "Data berhasil disimpan", Toast.LENGTH_SHORT).show()
-                        // Kosongkan field setelah penyimpanan berhasil
-                        binding.nama.text.clear()
-                        binding.jumlah.text.clear()
-                        binding.alamat.text.clear()
-                        binding.noHp.text.clear()
+                        Toast.makeText(this, "Berhasil order", Toast.LENGTH_SHORT).show()
+                        // Clear form fields
+                        val intent = Intent(this@PemesananActivity, PembayaranActivity::class.java)
+                        startActivity(intent)
                     }
                     .addOnFailureListener { e ->
-                        Toast.makeText(this, "Gagal menyimpan data: ${e.message}", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            this,
+                            "Gagal menyimpan data: ${e.message}",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
             } else {
-                Toast.makeText(this, "Mohon isi semua field", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Mohon isi semua data", Toast.LENGTH_SHORT).show()
             }
-
-            val intent = Intent(this@PemesananActivity,PembayaranActivity::class.java)
-            startActivity(intent)
         }
+    }
+    private fun updateTotal() {
+        val pricePerItem = 6000
+        val total = quantity * pricePerItem
+        val formattedTotal = NumberFormat.getNumberInstance(Locale("in", "ID")).format(total)
+        binding.textView8.text = "Rp $formattedTotal"
     }
 }
