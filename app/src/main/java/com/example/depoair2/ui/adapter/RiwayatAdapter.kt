@@ -1,6 +1,5 @@
 package com.example.depoair2.ui.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.depoair2.databinding.ItemRiwayatBinding
 import com.example.depoair2.models.Orders
 import java.text.NumberFormat
+import java.text.SimpleDateFormat
+import java.util.Date
 import java.util.Locale
 
 class RiwayatAdapter(
@@ -21,7 +22,7 @@ class RiwayatAdapter(
         fun bind(riwayatItem: Orders) {
             if (isAdmin){
                 binding.textView3.text = "Isi ulang ${riwayatItem.jumlah} galon"
-                binding.tanggal.text = riwayatItem.tanggal
+                binding.tanggal.text = riwayatItem.tanggal?.toLong()?.let { formatDate(it) }
                 binding.selesai.text = riwayatItem.status
                 binding.nama.text = riwayatItem.nama
                 binding.alamat.text = riwayatItem.alamat
@@ -35,7 +36,7 @@ class RiwayatAdapter(
                 }
             }else{
                 binding.textView3.text = "Isi ulang ${riwayatItem.jumlah} galon"
-                binding.tanggal.text = riwayatItem.tanggal
+                binding.tanggal.text = riwayatItem.tanggal?.toLong()?.let { formatDate(it) }
                 binding.selesai.text = riwayatItem.status
                 binding.nama.visibility = View.GONE
                 binding.alamat.visibility = View.GONE
@@ -68,5 +69,11 @@ class RiwayatAdapter(
         val total = qty * pricePerItem
         val formattedTotal = NumberFormat.getNumberInstance(Locale("in", "ID")).format(total)
         return "Rp $formattedTotal"
+    }
+
+    fun formatDate(timestamp: Long): String {
+        val sdf = SimpleDateFormat("dd MMMM yyyy, HH:mm", Locale("id", "ID"))
+        val date = Date(timestamp)
+        return sdf.format(date)
     }
 }

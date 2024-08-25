@@ -24,6 +24,7 @@ class PemesananActivity : AppCompatActivity() {
     private lateinit var pref: SharedPreferences
     private lateinit var user: UserReference
     private var quantity: Int = 1
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDataPelanggan2Binding.inflate(layoutInflater)
@@ -33,13 +34,7 @@ class PemesananActivity : AppCompatActivity() {
         user = UserReference(this)
         database = FirebaseDatabase.getInstance().getReference("Orders")
         binding.tvquantity.text = quantity.toString()
-        binding.btnTambah.setOnClickListener {
-            quantity++
-            binding.tvquantity.text = quantity.toString()
-            updateTotal()
-        }
 
-        // Handle click on minus button
         binding.btnKurang.setOnClickListener {
             if (quantity > 1) {
                 quantity--
@@ -47,6 +42,17 @@ class PemesananActivity : AppCompatActivity() {
                 updateTotal()
             }
         }
+
+        binding.btnTambah.setOnClickListener {
+            if (quantity < 5) {
+                quantity++
+                binding.tvquantity.text = quantity.toString()
+                updateTotal()
+            } else {
+                Toast.makeText(this, "Kuantitas tidak bisa lebih dari 5", Toast.LENGTH_SHORT).show()
+            }
+        }
+
         binding.btnPesan.setOnClickListener {
             val nama = user.ambilUser()?.nama
             val jumlah = binding.tvquantity.text.toString()
@@ -54,9 +60,7 @@ class PemesananActivity : AppCompatActivity() {
             val alamat = binding.alamat.text.toString()
             val phone = user.ambilUser()?.phone
 
-            val date = Date()
-            val formatter = SimpleDateFormat("dd MMMM yyyy, EEEE HH:mm ", Locale("id", "ID"))
-            val tanggal = formatter.format(date)
+            val timestamp = System.currentTimeMillis() // Mengambil timestamp saat ini
 
             if (nama?.isNotEmpty() == true && jumlah.isNotEmpty()) {
                 val newOrderRef = database.push()
@@ -67,9 +71,9 @@ class PemesananActivity : AppCompatActivity() {
                     nama = nama,
                     jumlah = jumlah.toInt(),
                     status = status,
-                    phone =phone ,
+                    phone = phone,
                     alamat = alamat,
-                    tanggal = tanggal
+                    tanggal = timestamp.toDouble()
                 )
 
                 // Menyimpan data dengan ID
@@ -92,6 +96,7 @@ class PemesananActivity : AppCompatActivity() {
             }
         }
     }
+
     private fun updateTotal() {
         val pricePerItem = 6000
         val total = quantity * pricePerItem

@@ -8,7 +8,7 @@ data class Orders(
     val jumlah: Int? = null,
     val status: String? = null,
     val alamat: String? = null,
-    val tanggal: String? = null,
+    val tanggal: Double? = null,
     val phone:String? = null
 ){
     constructor() : this(null, null, null, null, null)

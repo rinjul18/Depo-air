@@ -28,8 +28,6 @@ class AdminActivity : AppCompatActivity() {
     private lateinit var database: DatabaseReference
     private lateinit var riwayatAdapter: RiwayatAdapter
     private val riwayatList = mutableListOf<Orders>()
-    private val pesananHariIni = mutableListOf<Orders>()
-    private val totalIsiGalon = mutableListOf<Orders>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +35,10 @@ class AdminActivity : AppCompatActivity() {
         binding = ActivityAdminBinding.inflate(layoutInflater)
         setContentView(binding.root)
         loadPesanan("Diproses")
+        binding.lihatRekap.setOnClickListener{
+            val intent = Intent(this,RekapActivity::class.java)
+            startActivity(intent)
+        }
         val chip = binding.chipGroup
         chip.isSingleSelection = true
         chip.isSelectionRequired = true
@@ -77,10 +79,9 @@ class AdminActivity : AppCompatActivity() {
                     riwayatList.clear()
                     for (orderSnapshot in snapshot.children) {
                         val order = orderSnapshot.getValue(Orders::class.java)
-                        Log.d("admin", "Fetched order: $order")
                         if (order != null && order.status == status) {
                             val riwayatItem = Orders(
-                                orderId = orderSnapshot.key, // Menyimpan orderId dari snapshot
+                                orderId = orderSnapshot.key,
                                 jumlah = order.jumlah,
                                 tanggal = order.tanggal,
                                 status = order.status,
@@ -90,7 +91,7 @@ class AdminActivity : AppCompatActivity() {
                             riwayatList.add(riwayatItem)
                         }
                     }
-                    riwayatAdapter.notifyDataSetChanged() // Menyegarkan RecyclerView
+                    riwayatAdapter.notifyDataSetChanged()
                 }
 
                 override fun onCancelled(error: DatabaseError) {
